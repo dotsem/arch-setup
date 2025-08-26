@@ -93,13 +93,13 @@ PACMAN_PACKAGES=(
     pipewire pipewire-pulse pipewire-jack wireplumber
     which zsh unzip wine go flatpak php mysql docker xdg-desktop-portal-hyprland
     qt5 qt6 wayland xorg-xinit xorg-xauth xorg-server wofi os-prober github-cli
-    zsh-syntax-highlighting zsh-autosuggestions xxd neovim gwenview ardour 
+    zsh-syntax-highlighting zsh-autosuggestions xxd neovim gwenview ardour gtk-layer-shell
     hyprpicker hypridle hyprlock hyprpaper hyprshot hyprutils hyprpolkitagent
 )
 
 AUR_PACKAGES=(
     android-sdk google-chrome hyprshell hyprsunset quickshell-git rofi-wayland
-    visual-studio-code-bin angular-cli zen-browser-bin
+    visual-studio-code-bin angular-cli zen-browser-bin flutter
     oh-my-zsh-git xampp tuxguitar discord obs-studio steam neofetch lutris gamemode
     ntfs-3g exfat-utils btrfs-progs networkmanager-openvpn openssh xwaylandvideobridge
 )
