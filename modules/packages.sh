@@ -95,6 +95,7 @@ PACMAN_PACKAGES=(
     qt5 qt6 wayland xorg-xinit xorg-xauth xorg-server wofi os-prober github-cli
     zsh-syntax-highlighting zsh-autosuggestions xxd neovim gwenview ardour gtk-layer-shell
     hyprpicker hypridle hyprlock hyprpaper hyprshot hyprutils hyprpolkitagent
+    libreoffice-still obsidian
 )
 
 AUR_PACKAGES=(
