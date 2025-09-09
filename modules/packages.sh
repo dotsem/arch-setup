@@ -101,7 +101,7 @@ PACMAN_PACKAGES=(
 AUR_PACKAGES=(
     android-sdk google-chrome hyprshell hyprsunset quickshell-git rofi-wayland
     visual-studio-code-bin angular-cli zen-browser-bin flutter
-    oh-my-zsh-git xampp tuxguitar discord_arch_electron obs-studio steam neofetch lutris gamemode
+    oh-my-zsh-git xampp tuxguitar vesktop-bin obs-studio steam neofetch lutris gamemode
     ntfs-3g exfat-utils btrfs-progs networkmanager-openvpn openssh xwaylandvideobridge
 )
 
