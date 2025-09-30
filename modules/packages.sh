@@ -29,14 +29,20 @@ install_package() {
                     log "WARN" "Attempt $attempt failed for $package (yay)"
                 fi
                 ;;
+            flatpak)
+                if flatpak install -y flathub "$package"; then
+                    log "INFO" "Successfully installed $package via Flatpak"
+                    return 0
+                else
+                    log "WARN" "Attempt $attempt failed for $package (Flatpak)"
+                fi
+                ;;
         esac
     done
     
     log "ERROR" "All installation attempts failed for $package"
     return 1
 }
-
-
 
 # Install yay AUR helper
 install_yay() {
@@ -50,9 +56,7 @@ install_yay() {
             return 1
         }
         
-        # Clean up any previous yay build directory
         rm -rf /tmp/yay
-        
         log "INFO" "Cloning YAY repository"
         git clone https://aur.archlinux.org/yay.git /tmp/yay || {
             log "ERROR" "Failed to clone YAY repo"
@@ -60,8 +64,6 @@ install_yay() {
         }
         
         cd /tmp/yay
-        
-        # Check if running as root (makepkg should not be run as root)
         if [ "$(id -u)" -eq 0 ]; then
             log "ERROR" "makepkg should NOT be run as root. Aborting YAY build."
             cd - >/dev/null
@@ -83,6 +85,26 @@ install_yay() {
         echo -e "${GREEN}Yay already installed!${NC}"
     fi
 }
+
+# Ensure Flatpak and Flathub are set up
+setup_flatpak() {
+    section "Setting up Flatpak"
+    log "INFO" "Installing Flatpak if missing"
+    sudo -n pacman -S --needed --noconfirm flatpak || {
+        log "ERROR" "Failed to install Flatpak"
+        return 1
+    }
+
+    if ! flatpak remotes | grep -q flathub; then
+        log "INFO" "Adding Flathub remote"
+        flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    fi
+}
+
+# Example Flatpak package list
+FLATPAK_PACKAGES=(
+    org.gnome.Mahjongg com.github.wwmm.easyeffects
+)
 
 # Package lists
 PACMAN_PACKAGES=(

@@ -113,6 +113,11 @@ main() {
         failed_steps+=("install_yay")
         ((errors++))
     fi
+    if ! setup_flatpak; then
+        log "ERROR" "Flatpak setup failed"
+        failed_steps+=("setup_flatpak")
+        ((errors++))
+    fi
     if ! setup_directories; then
         log "ERROR" "Directory creation failed"
         failed_steps+=("setup_directories")
