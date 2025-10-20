@@ -8,10 +8,10 @@ source "$(dirname "${BASH_SOURCE[0]}")/../helpers/logging.sh"
 install_package() {
     local installer="$1"
     local package="$2"
-    
+
     for attempt in {1..2}; do
         log "INFO" "Installation attempt $attempt for $package"
-        
+
         case $installer in
             pacman)
                 if sudo -n pacman -S --noconfirm --needed "$package"; then
@@ -39,7 +39,7 @@ install_package() {
                 ;;
         esac
     done
-    
+
     log "ERROR" "All installation attempts failed for $package"
     return 1
 }
@@ -48,28 +48,28 @@ install_package() {
 install_yay() {
     section "Installing YAY AUR Helper"
     log "INFO" "Starting YAY installation"
-    
+
     if ! command -v yay &>/dev/null; then
         log "DEBUG" "Installing dependencies"
         sudo -n pacman -S --needed --noconfirm git base-devel || {
             log "ERROR" "Failed to install dependencies"
             return 1
         }
-        
+
         rm -rf /tmp/yay
         log "INFO" "Cloning YAY repository"
         git clone https://aur.archlinux.org/yay.git /tmp/yay || {
             log "ERROR" "Failed to clone YAY repo"
             return 1
         }
-        
+
         cd /tmp/yay
         if [ "$(id -u)" -eq 0 ]; then
             log "ERROR" "makepkg should NOT be run as root. Aborting YAY build."
             cd - >/dev/null
             return 1
         fi
-        
+
         log "INFO" "Building YAY package"
         makepkg -si --noconfirm || {
             log "ERROR" "YAY build failed"
@@ -77,7 +77,7 @@ install_yay() {
             return 1
         }
         cd - >/dev/null
-        
+
         log "INFO" "YAY installed successfully"
         echo -e "${GREEN}Yay installed!${NC}"
     else
@@ -117,7 +117,7 @@ PACMAN_PACKAGES=(
     qt5 qt6 wayland xorg-xinit xorg-xauth xorg-server wofi os-prober github-cli
     zsh-syntax-highlighting zsh-autosuggestions xxd neovim gwenview ardour gtk-layer-shell
     hyprpicker hypridle hyprlock hyprpaper hyprshot hyprutils hyprpolkitagent
-    libreoffice-still obsidian docker-compose qalculate-gtk easyeffects nwg-look
+    libreoffice-still obsidian docker-compose qalculate-gtk easyeffects nwg-look tlp exfat-utils
 )
 
 AUR_PACKAGES=(
@@ -133,4 +133,3 @@ if lspci | grep -qi nvidia; then
         PACMAN_PACKAGES+=(nvidia nvidia-utils nvidia-settings)
     fi
 fi
-
