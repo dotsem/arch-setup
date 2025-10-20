@@ -111,7 +111,19 @@ clone_dotfiles() {
 
 
 setup_network() {
-    sudo -n systemctl enable --now NetworkManager
+    section "NETWORK CONFIGURATION" "$BLUE"
+    log "INFO" "Configuring NetworkManager"
+    
+    # Enable and start NetworkManager
+    if sudo -n systemctl enable --now NetworkManager 2>> "$LOG_FILE"; then
+        log "INFO" "NetworkManager enabled and started"
+        echo -e "${GREEN}NetworkManager configured!${NC}"
+        return 0
+    else
+        log "ERROR" "Failed to enable NetworkManager"
+        echo -e "${RED}Failed to configure NetworkManager!${NC}"
+        return 1
+    fi
 }
 
 setup_moncon() {
