@@ -54,6 +54,8 @@ NONESSENTIAL_PACMAN_PACKAGES=(
     
     # Hardware info
     hwinfo
+
+    baobab
 )
 
 NONESSENTIAL_AUR_PACKAGES=(
@@ -100,5 +102,4 @@ NONESSENTIAL_AUR_PACKAGES=(
 NONESSENTIAL_FLATPAK_PACKAGES=(
     org.gnome.Mahjongg
     com.github.wwmm.easyeffects
-    org.gnome.baobab
 )
