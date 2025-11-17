@@ -8,6 +8,7 @@ NONESSENTIAL_PACMAN_PACKAGES=(
     cmake
     gcc
     rust
+    rust-src
     go
     nodejs
     npm
